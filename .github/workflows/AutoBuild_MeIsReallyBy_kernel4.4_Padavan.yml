@@ -47,6 +47,7 @@ env:
   FIRMWARE_DATEPREFIX: $(date +"%Y%m%d")
   FIRMWARE_AUTHOR: MeIsReallyBa
   FIRMWARE_PATH: /opt/firmwares
+ #GITHUB_RELEASE: https://github.com/wrs-xiaolu/openwrt-AutoBulid-Test/releases
 jobs:
   build:
     runs-on: ubuntu-20.04
