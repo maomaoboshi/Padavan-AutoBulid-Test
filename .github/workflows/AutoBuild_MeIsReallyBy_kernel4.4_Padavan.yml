@@ -74,6 +74,8 @@ jobs:
         tar -xf mipsel-linux-uclibc.tar.xz -C toolchain-4.4.x
     - name: Parse json string of include plugins
       run: |
+        echo "aria=${{fromJson(github.event.inputs.plugins).aria}}" >> $GITHUB_ENV
+        echo "transmission=${{fromJson(github.event.inputs.plugins).transmission}}" >> $GITHUB_ENV
         echo "vpnsvr=${{fromJson(github.event.inputs.plugins).vpnsvr}}" >> $GITHUB_ENV
         echo "vpncli=${{fromJson(github.event.inputs.plugins).vpncli}}" >> $GITHUB_ENV
         echo "vpncmd=${{fromJson(github.event.inputs.plugins).vpncmd}}" >> $GITHUB_ENV
