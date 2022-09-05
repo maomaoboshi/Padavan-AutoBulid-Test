@@ -30,7 +30,7 @@ on:
       plugins:
         description: 'json format string of include configs'
         required: true
-        default: '{"aria":"y","transmission":"n","vpnsvr":"n","vpncli":"n","vpncmd":"n","ss":"y","v2ray":"n","xray":"y","trojan":"n","ssobfs":"n","dnsforwarder":"n","adbyby":"n","adguardhome":"n","smartdns":"n","aliddns":"n","zerotier":"n","ddnsto":"n","wireguard":"n","aldriver":"n","sqm":"y","mentohust":"n","scutclient":"n","njitclient":"n","minieap":"n","dogcom":"n"}'
+        default: '{"aria":"y","transmission":"n","vpnsvr":"n","vpncli":"n","vpncmd":"n","ss":"y","v2ray":"y","xray":"n","trojan":"y","ssobfs":"n","dnsforwarder":"n","adbyby":"n","adguardhome":"n","smartdns":"n","aliddns":"n","zerotier":"n","ddnsto":"n","wireguard":"n","aldriver":"n","sqm":"y","mentohust":"n","scutclient":"n","njitclient":"n","minieap":"n","dogcom":"n"}'
       firmwarever:
         description: 'firmware''s version'
         required: true
@@ -38,7 +38,7 @@ on:
       uploadwet:
         type: boolean
         description: 'whether to upload firmware to wetransfer'
-        default: 'true'
+        default: 'false'
 env:
   REPOSITORY_URL: https://github.com/MeIsReallyBa/padavan-4.4.git
   TOOLCHAIN_URL: https://github.com/hanwckf/padavan-toolchain/releases/download/linux-4.4-v1.0/mipsel-linux-uclibc.tar.xz
@@ -173,11 +173,9 @@ jobs:
         #
         #下载功能
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=${{env.aria}}" >> .config #配置项aria
-        if [ ${{env.aria}} == 'y' ] ; then
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config #配置项aria网页控制台
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=${{env.aria}}" >> .config #配置项aria网页控制台
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=${{env.transmission}}" >> .config #删除配置项TRANSMISSION
-         if [ ${{env.aria}} == 'y' ] ; then
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config #配置项TRANSMISSION网页控制台
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=${{env.transmission}}" >> .config #配置项TRANSMISSION网页控制台
         #校园网相关开始
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=${{env.mentohust}}" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=${{env.scutclient}}" >> .config #SCUTCLIENT
