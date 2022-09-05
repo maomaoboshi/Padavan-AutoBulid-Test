@@ -173,10 +173,10 @@ jobs:
         #
         #下载功能
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=${{env.aria}}" >> .config #配置项aria
-        if [ env.aria == 'y' ] ; then
+        if [ ${{env.aria}} == 'y' ] ; then
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config #配置项aria网页控制台
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=${{env.transmission}}" >> .config #删除配置项TRANSMISSION
-         if [ env.transmission == 'y' ] ; then
+         if [ ${{env.aria}} == 'y' ] ; then
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config #配置项TRANSMISSION网页控制台
         #校园网相关开始
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=${{env.mentohust}}" >> .config #MENTOHUST
