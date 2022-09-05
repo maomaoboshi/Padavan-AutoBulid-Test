@@ -30,7 +30,7 @@ on:
       plugins:
         description: 'json format string of include configs'
         required: true
-        default: '{"vpnsvr":"n","vpncli":"n","vpncmd":"n","ss":"y","v2ray":"n","xray":"y","trojan":"n","ssobfs":"n","dnsforwarder":"n","adbyby":"n","adguardhome":"n","smartdns":"n","aliddns":"n","zerotier":"n","ddnsto":"n","wireguard":"n","aldriver":"n","sqm":"y","mentohust":"n","scutclient":"n","njitclient":"n","minieap":"n","dogcom":"n"}'
+        default: '{"aria":"y","transmission":"n","vpnsvr":"n","vpncli":"n","vpncmd":"n","ss":"y","v2ray":"n","xray":"y","trojan":"n","ssobfs":"n","dnsforwarder":"n","adbyby":"n","adguardhome":"n","smartdns":"n","aliddns":"n","zerotier":"n","ddnsto":"n","wireguard":"n","aldriver":"n","sqm":"y","mentohust":"n","scutclient":"n","njitclient":"n","minieap":"n","dogcom":"n"}'
       firmwarever:
         description: 'firmware''s version'
         required: true
@@ -125,6 +125,11 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER/d' .config #删除配置项阿里云盘
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config #删除配置项smartdns
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SQM/d' .config #删除配置项sqm
+        #下载功能
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config #删除配置项aria
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' .config #删除配置项aria网页控制台
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION/d' .config #删除配置项TRANSMISSION
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL/d' .config #删除配置项TRANSMISSION网页控制台
         #校园网相关开始
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' .config #删除配置项MENTOHUST
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT/d' .config #删除配置项SCUTCLIENT
@@ -164,6 +169,13 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=${{env.aldriver}}" >> .config #阿里云盘
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=${{env.sqm}}" >> .config #SQM
         #
+        #下载功能
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=${{env.aria}}" >> .config #配置项aria
+        if [ env.aria == 'y' ] ; then
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config #配置项aria网页控制台
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=${{env.transmission}}" >> .config #删除配置项TRANSMISSION
+         if [ env.transmission == 'y' ] ; then
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config #配置项TRANSMISSION网页控制台
         #校园网相关开始
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=${{env.mentohust}}" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=${{env.scutclient}}" >> .config #SCUTCLIENT
