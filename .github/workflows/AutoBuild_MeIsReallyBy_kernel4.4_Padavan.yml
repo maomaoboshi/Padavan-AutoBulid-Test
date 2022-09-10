@@ -7,26 +7,7 @@ on:
         type: choice
         description: 'target to compile'
         options:
-        - K2P
         - RM2100
-        - R2100
-        - K2P-USB
-        - CR660x
-        - JCG-Q20
-        - JCG-AC860M
-        - JCG-AC876M
-        - JCG-Y2
-        - DIR-878
-        - DIR-882
-        - MR2600
-        - MI-R3P
-        - MI-R3G
-        - XY-C1
-        - WR1200JS
-        - MSG1500
-        - BELL-A040WQ
-        - ZTE-E8820S
-        - B70
       plugins:
         description: 'json format string of include configs'
         required: true
@@ -34,7 +15,7 @@ on:
       firmwarever:
         description: 'firmware''s version'
         required: true
-        default: '20220905'
+        default: '20220910'
       uploadwet:
         type: boolean
         description: 'whether to upload firmware to wetransfer'
@@ -50,7 +31,7 @@ env:
  #GITHUB_RELEASE: https://github.com/wrs-xiaolu/openwrt-AutoBulid-Test/releases
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
